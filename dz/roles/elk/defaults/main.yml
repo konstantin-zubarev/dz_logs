@@ -1,0 +1,7 @@
+---
+# defaults file for roles/elk
+
+elk_packages:
+  - elasticsearch
+  - kibana
+  - logstash

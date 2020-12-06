@@ -1,0 +1,14 @@
+---
+# defaults file for roles/web
+
+nginx:
+  port: 80
+  log_server: 192.168.11.101
+  log_server_port: 514
+
+audit:
+  dir: /etc/nginx/
+  name: nginx_conf
+  
+  
+#{{ nginx['log_server'] }}

@@ -1,0 +1,15 @@
+---
+# handlers file for roles/web
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+    
+- name: restart auditd
+  command: service auditd restart

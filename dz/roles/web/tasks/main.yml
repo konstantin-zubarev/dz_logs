@@ -1,0 +1,15 @@
+---
+# tasks file for roles/web
+
+- name: Set timezone to Europe/Moscow
+  timezone:
+    name: Europe/Moscow
+
+- name: NGINX
+  include_tasks: nginx.yml
+
+- name: RSYSLOG
+  include_tasks: rsyslog.yml
+  
+- name: AUDITD
+  include_tasks: auditd.yml

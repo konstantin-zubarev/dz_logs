@@ -1,0 +1,13 @@
+---
+
+- name: Setup log server
+  hosts: log
+  become: true
+  roles:
+    - log
+
+- name: Config client
+  hosts: web
+  become: true
+  roles:
+    - web

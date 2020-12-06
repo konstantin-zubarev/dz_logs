@@ -1,0 +1,10 @@
+---
+# tasks file for roles/elk
+
+- name: ELK
+  include_tasks: elk.yml
+  when: ansible_hostname == "elk"
+  
+- name: WEB
+  include_tasks: filebeat.yml
+  when: ansible_hostname == "web"

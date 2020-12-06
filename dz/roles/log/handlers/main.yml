@@ -1,0 +1,10 @@
+---
+# handlers file for roles/log
+
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+
+- name: restart auditd
+  command: service auditd restart

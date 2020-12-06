@@ -1,0 +1,9 @@
+---
+# tasks file for roles/log
+
+- name: Copy rsyslog from template
+  template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+  notify: restart rsyslog
+  tags: rsyslog

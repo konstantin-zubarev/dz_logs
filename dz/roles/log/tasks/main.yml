@@ -1,0 +1,12 @@
+---
+# tasks file for roles/log
+
+- name: Set timezone to Europe/Moscow
+  timezone:
+    name: Europe/Moscow
+
+- name: RSYSLOG
+  include_tasks: rsyslog.yml
+
+- name: AUDITD
+  include_tasks: auditd.yml

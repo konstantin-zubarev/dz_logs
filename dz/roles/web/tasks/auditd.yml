@@ -1,0 +1,39 @@
+---
+# tasks file for roles/web
+
+- name: Install audisp-plugins
+  yum:
+    name: audispd-plugins
+    state: present
+  tags: audispd
+
+- name: Config remote server ip
+  replace:
+    path: /etc/audisp/audisp-remote.conf
+    regexp: '^remote_server = *$'
+    replace: "remote_server = {{ nginx['log_server'] }}"
+  notify: restart auditd
+  tags: audispd
+
+- name: Enable auditd remote logging
+  replace:
+    path: /etc/audisp/plugins.d/au-remote.conf
+    regexp: 'active = no'
+    replace: "active = yes"
+  notify: restart auditd
+  tags: audispd
+
+- name: Disable local auditd logging
+  replace:
+    path: /etc/audit/auditd.conf
+    regexp: 'write_logs = yes'
+    replace: "write_logs = no"
+  notify: restart auditd
+  tags: audispd
+
+- name: Add audit rule
+  template:
+    src: nginx_conf.j2
+    dest: /etc/audit/rules.d/{{ audit['name'] }}.rules
+  notify: restart auditd
+  tags: audispd

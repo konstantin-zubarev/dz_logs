@@ -1,0 +1,8 @@
+[SRV_LOGS]
+log ansible_host=192.168.11.101
+
+[SRV_WEB]
+web ansible_host=192.168.11.102
+
+[SRV_ELK]
+elk ansible_host=192.168.11.103

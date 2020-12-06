@@ -1,0 +1,16 @@
+---
+# handlers file for roles/log
+
+- name: Install audisp plugin
+  yum:
+    name: audispd-plugins
+    state: present
+  tags: audispd
+
+- name: Listen for port 60
+  replace:
+    path: /etc/audit/auditd.conf
+    regexp: '^##tcp_listen_port = 60'
+    replace: 'tcp_listen_port = 60'
+  notify: restart auditd
+  tags: audispd

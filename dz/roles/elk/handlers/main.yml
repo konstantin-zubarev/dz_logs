@@ -1,0 +1,27 @@
+---
+# handlers file for roles/elk
+
+- name: restart elasticsearch
+  systemd:
+    name: elasticsearch
+    state: restarted
+
+- name: restart kibana
+  systemd:
+    name: kibana
+    state: restarted
+
+- name: restart logstash
+  systemd:
+    name: logstash
+    state: restarted
+    
+- name: restart filebeat
+  systemd:
+    name: filebeat
+    state: restarted
+    
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted

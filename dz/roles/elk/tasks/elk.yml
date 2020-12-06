@@ -1,0 +1,70 @@
+---
+# tasks file for roles/elk
+
+- name: Set timezone to Europe/Moscow
+  timezone:
+    name: Europe/Moscow
+    
+- name: Install Java
+  yum:
+    name: java-1.8.0-openjdk
+    state: present
+  tags: elk
+      
+- name: ELK repo
+  copy:
+    src: CentOS-ELK.repo
+    dest: /etc/yum.repos.d/
+  tags: elk
+
+- name: Install ELK packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ elk_packages }}"
+  tags: elk
+  
+- name: Start ELK Elasticsearch
+  systemd:
+    name: elasticsearch
+    state: started
+    enabled: yes
+  tags: elk
+
+- name: Start ELK Kibana
+  systemd:
+    name: kibana
+    state: started
+    enabled: yes
+  tags: elk
+
+- name: Start ELK Logstash
+  systemd:
+    name: logstash
+    state: started
+    enabled: yes
+  tags: elk
+  
+- name: Config Elasticsearch
+  replace:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: '^#network.host: 192.168.0.1'
+    replace: 'network.host: 127.0.0.1'
+  notify: restart elasticsearch
+  tags: elk
+  
+- name: Config Kibana
+  replace:
+    path: /etc/kibana/kibana.yml
+    regexp: '^#server.host: "localhost"'
+    replace: 'server.host: "192.168.11.103"'
+  notify: restart kibana
+  tags: elk
+  
+- name: Conf logstash
+  copy:
+    src: nginx_logs.conf
+    dest: /etc/logstash/conf.d/
+  notify: restart logstash
+  tags: elk
