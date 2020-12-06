@@ -93,9 +93,12 @@ tail /var/log/rsyslog/web/nginx_error.log
 ```
 #### Дополнительное задание *
 Для проверки необходимо, в терминале запустить `ansible-playbook elk.yml`. Выполнить эти команды `curl -I 192.168.11.102` и `curl -I 192.168.11.102/tmp`, для того, что бы появились записи логов nginx. В браузере передти на страницу `http://192.168.11.103:5601/` и настроить.
-
-
-
-
+![](screenshots/1.jpg)
+![](screenshots/2.jpg)
+![](screenshots/3.jpg)
+![](screenshots/4.jpg)
+![](screenshots/5.jpg)
+![](screenshots/6.jpg)
+![](screenshots/7.jpg)
 
 Таким образом на центральных лог системы `elk` приходят только логи `nginx`, а на второй центральных лог системы `log` все остальные логи `web` хоста.
