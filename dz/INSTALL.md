@@ -52,7 +52,6 @@ access_log syslog:server={{ nginx['log_server'] }}:{{ nginx['log_server_port'] }
 - в файле `/etc/audisp/audisp-remote.conf`
 ```
 	remote_server = 192.168.11.101
-	#port = 514
 ```
 - в файле `/etc/audisp/plugins.d/au-remote.conf`
 ```
