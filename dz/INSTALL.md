@@ -19,13 +19,12 @@
 [root@web ~]# vi /etc/nginx/nginx.conf
 ```
 ```
-http {
-..................................................................................................
+error_log /var/log/nginx/error.log crit;
+error_log syslog:server={{ nginx['log_server'] }}:{{ nginx['log_server_port'] }},facility=local7,tag=nginx_error,severity=info;
+pid /run/nginx.pid;
 
 
-	access_log syslog:server=192.168.11.101:514,facility=local7,tag=nginx_access,severity=info main;
-	error_log syslog:server=192.168.11.101:514,facility=local3,tag=nginx_error,severity=error;
-	error_log  /var/log/nginx/error.log warn;	
+access_log syslog:server={{ nginx['log_server'] }}:{{ nginx['log_server_port'] }},facility=local7,tag=nginx_access,severity=info main;
 ```
 Перезагрузить Nginx
 ```
